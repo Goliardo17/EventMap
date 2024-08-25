@@ -22,9 +22,22 @@ const create = ({ email, password }) => {
   db.setData(newData);
 };
 
+const edit = ({ newState }) => {
+  const newData = db.data.map((item) => {
+    if (item.id === newState.id) {
+      return newState;
+    }
+
+    return item;
+  });
+
+  db.setData(newData)
+};
+
 const authData = {
   get,
   create,
+  edit,
 };
 
 module.exports = authData;
