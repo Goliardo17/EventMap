@@ -1,21 +1,30 @@
-const { model } = require("../../../models")
+const { model } = require("../../../models");
 
-const db = model.user.info
+const db = model.user.info;
 
-const get = ({place, value}) => {
-    return db.filter((item) => item[place] === value)
-}
+const get = ({ place, value }) => {
+  return db.data.find((item) => item[place] === value);
+};
 
-const create = (value) => {
-    const newData = [...db]
+const create = ({ userId, name, sureName, image, birthday }) => {
+  if (!userId || !name) {
+    throw new Error({ message: "Отсутствуют необходимые поля" });
+  }
 
-    newData.push(value)
+  const newData = [...db.data];
 
-    db.setData(newData)
-}
+  const lastId = db.getLastId();
+
+  const id = lastId ? lastId + 1 : 1;
+
+  newData.push({ id, userId, name, sureName, image, birthday });
+
+  db.setData(newData);
+};
 
 const infoData = {
-    get, create
-}
+  get,
+  create,
+};
 
-module.exports = infoData
+module.exports = infoData;

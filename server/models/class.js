@@ -12,7 +12,7 @@ class Data {
 
     const record = this.data[lastRecord];
 
-    return record.id;
+    return record?.id ? record.id : undefined
   }
 }
 

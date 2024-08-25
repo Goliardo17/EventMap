@@ -1,21 +1,34 @@
-const { model } = require("../../../models")
+const { model } = require("../../../models");
 
-const db = model.user.categories
+const db = model.user.categories;
 
-const get = ({place, value}) => {
-    return db.filter((item) => item[place] === value)
-}
+const get = ({ place, value }) => {
+  const data = db.data.filter((item) => item[place] === value);
 
-const create = (value) => {
-    const newData = [...db]
+  return data.map((item) => item.category)
+};
 
-    newData.push(value)
+const create = ({ userId, categories }) => {
+  if (!userId || !categories.length) {
+    throw new Error({ message: "Отсутствуют необходимые поля" });
+  }
 
-    db.setData(newData)
-}
+  for (let category of categories) {
+    const newData = [...db.data];
+
+    const lastId = db.getLastId();
+
+    const id = lastId ? lastId + 1 : 1;
+
+    newData.push({ id, userId, category });
+
+    db.setData(newData);
+  }
+};
 
 const categoriesData = {
-    get, create
-}
+  get,
+  create,
+};
 
-module.exports = categoriesData
+module.exports = categoriesData;
