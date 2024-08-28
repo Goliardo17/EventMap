@@ -1,5 +1,7 @@
 const { Data } = require("../../class")
 
-const infoData = new Data ([])
+const places = ["id", "name", "sureName", "birthday"]
+
+const infoData = new Data (places)
 
 module.exports = infoData
