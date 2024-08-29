@@ -1,23 +1,23 @@
-const { model } = require("../../../models");
+const { models } = require("../../../../models");
 
-const db = model.user.info;
+const userInfo = models.repo.local.entity.user.info;
 
-const get = (filter, form = db.places) => {
-  return db.select(filter, form);
+const get = (filter, form = userInfo.places) => {
+  return userInfo.select(filter, form);
 };
 
 const create = (newData) => {
-  return db.insert(newData);
+  return userInfo.insert(newData);
 };
 
-const edit = (filter, newState) => {
-  return db.update(filter, newState)
-}
+const edit = (filter, newData) => {
+  return userInfo.update(filter, newData);
+};
 
-const servicesInfo = {
+const info = {
   get,
   create,
   edit,
 };
 
-module.exports = servicesInfo;
+module.exports = { info };

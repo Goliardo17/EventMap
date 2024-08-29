@@ -1,23 +1,23 @@
-const { model } = require("../../../models");
+const { models } = require("../../../../models");
 
-const db = model.user.auth;
+const userAuth = models.repo.local.entity.user.auth;
 
-const get = (filter, form = db.places) => {
-  return db.select(filter, form);
+const get = (filter, form = userAuth.places) => {
+  return userAuth.select(filter, form);
 };
 
-const create = (data) => {
-  return db.insert(data);
+const create = (newData) => {
+  return userAuth.insert(newData);
 };
 
-const edit = (filter, newState) => {
-  return db.update(filter, newState);
+const edit = (filter, newData) => {
+  return userAuth.update(filter, newData);
 };
 
-const authData = {
+const auth = {
   get,
   create,
   edit,
 };
 
-module.exports = authData;
+module.exports = { auth };

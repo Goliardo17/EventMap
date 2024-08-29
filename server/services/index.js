@@ -1,7 +1,11 @@
-const user = require("./user")
+const { eventServices } = require("./event");
+const { userServices } = require("./user");
+const { categoryServices } = require("./category");
 
 const services = {
-    user
-}
+  user: userServices,
+  event: eventServices,
+  category: categoryServices,
+};
 
-module.exports = { services }
+module.exports = { services };

@@ -1,7 +1,7 @@
-const user = require("./user")
+const { repo } = require("./repo")
 
-const model = {
-    user
+const models = {
+    repo
 }
 
-module.exports = { model }
+module.exports = { models }

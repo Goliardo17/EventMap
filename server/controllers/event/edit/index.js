@@ -1,13 +1,13 @@
 const { services } = require("../../../services");
 
-const userServices = services.user;
+const eventServices = services.event;
 
-const err4 = {
-  message: "требуемое поле не передано",
+const err1 = {
+  message: "такого мероприятия не существует",
 };
 
-const err5 = {
-  message: "вам отказано в доступе",
+const err2 = {
+  message: "отказано в доступе",
 };
 
 // helper (...
@@ -24,56 +24,55 @@ const helperCheckPlace = (arr1, arr2) => {
 
 const edit = (req, res) => {
   try {
-    const auth = req.user;
+    const { id } = req.user;
     const newData = req.body;
     const newDataPlaces = Object.keys(newData);
 
-    if (!newData?.id) {
-      res.status(400).json(err4);
+    const info = eventServices.info.get({ id: newData.id })[0];
+
+    if (!info?.id) {
+      res.status(400).json(err1);
       return;
     }
 
-    if (newData.id !== auth.id) {
-      res.status(400).json(err5);
+    if (info.userId !== id) {
+      res.status(400).json(err2);
       return;
     }
 
-    const checkAuth = () => {
-      const placesAuth = ["email", "password"];
-      return helperCheckPlace(placesAuth, newDataPlaces);
-    };
-
-    if (checkAuth()) {
-      userServices.auth.edit(auth, newData);
-    }
-
-    const filter = {
-      userId: auth.id,
+    const infoFilter = {
+      userId: info.userId,
     };
 
     const checkInfo = () => {
-      const placesInfo = ["name", "sureName"];
+      const placesInfo = ["title", "description"];
       return helperCheckPlace(placesInfo, newDataPlaces);
     };
 
     if (checkInfo()) {
-      userServices.info.edit(filter, newData);
+      eventServices.info.edit(infoFilter, newData);
     }
 
+    const categoriesFilter = {
+      eventId: info.id,
+    };
+
     if (newData?.categories) {
-      const categories = userServices.categories.get(filter).map((item) => {
-        return item.categoryId;
-      });
+      const categories = eventServices.categories
+        .get(categoriesFilter)
+        .map((item) => {
+          return item.categoryId;
+        });
 
       newData.categories
         .filter((categoryId) => {
           return !categories.includes(categoryId);
         })
         .map((categoryId) => {
-          return { userId: auth.id, categoryId };
+          return { eventId: info.id, categoryId };
         })
         .forEach((item) => {
-          userServices.categories.create(item);
+          eventServices.categories.create(item);
         });
 
       categories
@@ -81,10 +80,10 @@ const edit = (req, res) => {
           return !newData.categories.includes(categoryId);
         })
         .map((categoryId) => {
-          return { userId: auth.id, categoryId };
+          return { eventId: info.id, categoryId };
         })
         .forEach((item) => {
-          userServices.categories.deletePlace(item);
+          eventServices.categories.deletePlaces(item);
         });
     }
 

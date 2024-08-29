@@ -4,32 +4,19 @@ const userServices = services.user;
 const categoryServices = services.category;
 
 const err2 = {
-  message: "такого пользователя не существует"
-}
+  message: "такого пользователя не существует",
+};
 
-const err3 = {
-  message: "не верно указан пароль"
-}
-
-const enter = (req, res) => {
+const get = (req, res) => {
   try {
-    const form = req.body;
+    const filter = req.query;
 
     // TODO: валидация формы
 
-    const authInfo = userServices.auth.get(form);
+    const user = userServices.auth.get(filter, ["id", "email"])[0];
 
-    if (!authInfo.length) {
+    if (!user?.id) {
       res.status(400).json(err2);
-      return;
-    }
-
-    const user = authInfo[0];
-
-    // TODO: хеширование пароля из формы
-
-    if (user.password !== form.password) {
-      res.status(400).json(err3);
       return;
     }
 
@@ -54,9 +41,6 @@ const enter = (req, res) => {
       return categoryServices.info.get(filter, ["id", "name"])[0];
     });
 
-    // генерация токена
-    const token = "key";
-
     const response = {
       id: user.id,
       email: user.email,
@@ -64,10 +48,10 @@ const enter = (req, res) => {
       categories,
     };
 
-    res.status(200).json({ token, response });
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json(error.message);
   }
 };
 
-module.exports = { enter };
+module.exports = { get };
