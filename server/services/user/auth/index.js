@@ -2,29 +2,22 @@ const { model } = require("../../../models");
 
 const db = model.user.auth;
 
-const get = ({ place, value }) => {
-  return db.data.find((item) => item[place] === value);
+const get = (filter, form = db.places) => {
+  return db.select(filter, form);
 };
 
-const create = ({ email, password }) => {
-  if (!email || !password) {
-    throw new Error({ message: "Отсутствуют необходимые поля" });
-  }
+const create = (data) => {
+  return db.insert(data);
+};
 
-  const newData = [...db.data];
-
-  const lastId = db.getLastId();
-
-  const id = lastId ? lastId + 1 : 1;
-
-  newData.push({ id, email, password });
-
-  db.setData(newData);
+const edit = (filter, newState) => {
+  return db.update(filter, newState);
 };
 
 const authData = {
   get,
   create,
+  edit,
 };
 
 module.exports = authData;

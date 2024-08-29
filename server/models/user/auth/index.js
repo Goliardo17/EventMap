@@ -1,5 +1,7 @@
 const { Data } = require("../../class")
 
-const authData = new Data ([])
+const places = ["id", "email", "password"]
+
+const authData = new Data (places)
 
 module.exports = authData
