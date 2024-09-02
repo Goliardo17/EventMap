@@ -1,7 +1,13 @@
 const { services } = require("../../../services");
+const { validation } = require("../../../share/validation");
 
 const userServices = services.user;
 const categoryServices = services.category;
+const requestForm = validation.user.enterUser
+
+const err1 = {
+  message: "форма не валидна"
+}
 
 const err2 = {
   message: "такого пользователя не существует"
@@ -15,7 +21,12 @@ const enter = (req, res) => {
   try {
     const form = req.body;
 
-    // TODO: валидация формы
+    const valid = requestForm.test(form)
+
+    if (!valid) {
+      res.status(400).json(err1);
+      return;
+    }
 
     const authInfo = userServices.auth.get(form);
 

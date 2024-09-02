@@ -1,16 +1,27 @@
 const { services } = require("../../../services");
+const { validation } = reqiure("../../../share/validation")
 
 const userServices = services.user;
+const requestForm = validation.user.newUser
 
 const err1 = {
   message: "такой пользователь уже существует",
 };
 
+const err2 = {
+  message: "форма не валидна"
+}
+
 const create = (req, res) => {
   try {
     const data = req.body;
 
-    // TODO: валидация формы
+    const valid = requestForm.test(data)
+
+    if (!valid) {
+      res.status(400).json(err2);
+      return;
+    }
 
     const checkEmail = userServices.auth.get({ email: data.email });
 
