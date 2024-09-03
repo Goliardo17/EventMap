@@ -2,7 +2,7 @@ const express = require("express");
 const { controllers } = require("../../controllers");
 const router = express.Router();
 
-// router.get("/all", controllers.event.get)
+router.get("/all", controllers.event.all)
 router.get("/invite/sent", controllers.invitation.getByEventId);
 router.get("/subscribers", controllers.subscriber.getByEventId);
 router.post("/create", controllers.event.create);
