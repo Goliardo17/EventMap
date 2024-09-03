@@ -4,7 +4,7 @@ const { testEmail } = require("../../../places/user/email");
 const { testName } = require("../../../places/user/name");
 const { testPassword } = require("../../../places/user/password");
 const { testSureName } = require("../../../places/user/sureName");
-const { testCategories } = require("../../../places/user/categories")
+// const { testCategories } = require("../../../places/user/categories")
 
 const places = {
   email: {
@@ -29,7 +29,7 @@ const places = {
   },
   categories: {
     ket: true,
-    test: testCategories,
+    // test: testCategories,
   }
 };
 
