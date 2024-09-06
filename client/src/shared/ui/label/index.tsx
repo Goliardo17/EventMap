@@ -1,10 +1,5 @@
-type CatgoryType = {
-    id: number,
+type LabelProps = {
     title: string,
 }
 
-type Props = {
-    category: CatgoryType,
-}
-
-export const Label = ({ category }: Props) => <p>{category.title}</p>;
+export const Label = ({ title }: LabelProps) => <p>{title}</p>;
