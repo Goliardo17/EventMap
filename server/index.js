@@ -1,5 +1,5 @@
 const express = require('express')
-const cors = require("corse")
+const cors = require("cors")
 
 const userRoutes = require("./routes/user")
 const eventRoutes = require("./routes/event")
