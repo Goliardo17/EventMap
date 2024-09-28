@@ -7,7 +7,7 @@ const validation = {
     enterUser,
   },
   event: {
-    filter,
+    filter: () => false
   }
 };
 

@@ -8,7 +8,7 @@ class Form {
     let check = true;
 
     for (let key of keys) {
-      const { req, test } = places[key];
+      const { req, test } = this.places[key];
 
       if (!form[key] && req) check = false;
 

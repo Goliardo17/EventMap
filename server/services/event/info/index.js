@@ -1,4 +1,4 @@
-const { models } = require("../../../../models");
+const { models } = require("../../../models");
 
 const eventInfo = models.repo.local.entity.event.info;
 
