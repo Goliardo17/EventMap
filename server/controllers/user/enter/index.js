@@ -21,12 +21,12 @@ const enter = (req, res) => {
   try {
     const form = req.body;
 
-    const valid = requestForm.test(form)
+    // const valid = requestForm.test(form)
 
-    if (!valid) {
-      res.status(400).json(err1);
-      return;
-    }
+    // if (!valid) {
+    //   res.status(400).json(err1);
+    //   return;
+    // }
 
     const authInfo = userServices.auth.get({email: form.email});
 
