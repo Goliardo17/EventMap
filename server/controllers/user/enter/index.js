@@ -28,7 +28,7 @@ const enter = (req, res) => {
       return;
     }
 
-    const authInfo = userServices.auth.get({email: form.email});
+    const authInfo = userServices.auth.get(form);
 
     if (!authInfo.length) {
       res.status(400).json(err2);

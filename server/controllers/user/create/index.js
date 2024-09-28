@@ -1,5 +1,5 @@
 const { services } = require("../../../services");
-const { validation } = require("../../../share/validation")
+const { validation } = reqiure("../../../share/validation")
 
 const userServices = services.user;
 const requestForm = validation.user.newUser

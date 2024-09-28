@@ -1,4 +1,4 @@
-const { models } = require("../../../models");
+const { models } = require("../../../../models");
 
 const userCategories = models.repo.local.entity.user.categories;
 

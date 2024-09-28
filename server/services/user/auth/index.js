@@ -1,4 +1,4 @@
-const { models } = require("../../../models");
+const { models } = require("../../../../models");
 
 const userAuth = models.repo.local.entity.user.auth;
 
