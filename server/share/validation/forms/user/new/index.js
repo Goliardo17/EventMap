@@ -27,10 +27,10 @@ const places = {
     key: true,
     test: testBirthday,
   },
-  categories: {
-    ket: true,
-    // test: testCategories,
-  }
+  // categories: {
+  //   key: true,
+  //   test: testCategories,
+  // }
 };
 
 const newUser = new Form(places);

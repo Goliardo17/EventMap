@@ -1,4 +1,4 @@
-import { MainPage } from "../pages/main"
+import { Enter } from "../pages/enter"
 import "./style.css"
 
-export const App: React.FC = () => <MainPage />
+export const App: React.FC = () => <Enter />

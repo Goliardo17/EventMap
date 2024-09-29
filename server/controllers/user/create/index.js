@@ -16,12 +16,12 @@ const create = (req, res) => {
   try {
     const data = req.body;
 
-    const valid = requestForm.test(data)
+    // const valid = requestForm.test(data)
 
-    if (!valid) {
-      res.status(400).json(err2);
-      return;
-    }
+    // if (!valid) {
+    //   res.status(400).json(err2);
+    //   return;
+    // }
 
     const checkEmail = userServices.auth.get({ email: data.email });
 
