@@ -3,7 +3,7 @@ class Form {
     this.places = places;
   }
 
-  test(form) {
+  test (form) {
     const keys = Object.keys(this.places);
     let check = true;
 
